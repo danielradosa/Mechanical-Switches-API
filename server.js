@@ -14,10 +14,12 @@ const authRoute = require('./routes/auth');
 
 // CONNECT TO MONGOdb
 mongoose.connect (
-    process.env.DBHOST,  { useUnifiedTopology: true, useNewUrlParser: true }
+    process.env.DBHOST,  { 
+        useUnifiedTopology: true, 
+        useNewUrlParser: true 
+    }
   ).catch(error => console.log("Error connecting to MongoDB: " + error));
-  
-  mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
+mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
 
 // ROUTES
 app.get("/api/welcome", (req, res) => {
