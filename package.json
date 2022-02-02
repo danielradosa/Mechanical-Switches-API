@@ -1,0 +1,26 @@
+{
+  "name": "mechanical-switches-api",
+  "version": "1.0.0",
+  "description": "Mechanical Switches API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "mechanical-switches-api"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Daniel Radosa",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.1.9"
+  }
+}
