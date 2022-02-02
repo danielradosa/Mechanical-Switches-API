@@ -8,9 +8,12 @@ require("dotenv-flow").config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// IMPORT ROUTES
-const switchRoute = require('./routes/switch');
-const authRoute = require('./routes/auth');
+// Start Server
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, function() {
+    console.log("Server running on port: " + PORT);
+})
 
 // CONNECT TO MONGOdb
 mongoose.connect (
@@ -21,18 +24,16 @@ mongoose.connect (
   ).catch(error => console.log("Error connecting to MongoDB: " + error));
 mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
 
+// IMPORT ROUTES
+const switchRoute = require('./routes/switch');
+const authRoute = require('./routes/auth');
+
 // ROUTES
 app.get("/api/welcome", (req, res) => {
     res.status(200).send({message: "Welcome to the MS-API"});
 })
 
 // CRUD
-
-
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, function() {
-    console.log("Server running on port: " + PORT);
-})
+app.use("/api/switches", switchRoute);
 
 module.exports = app;
