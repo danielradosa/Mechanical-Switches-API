@@ -55,9 +55,32 @@ router.get("/mount/3pin", (req, res) => {
     .catch(err => { res.status(500).send({ message: err.message }); })
 });
 
-// Update Route - Put
-
+// Update Route - Put (specific switch)
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    switches.findByIdAndUpdate(id, req.body)
+    .then(data => { 
+        if (!data) {
+            res.status(404).send({ message: "Cannot update switch with id: " + id});
+        } else {
+            res.send({ message: "Switch was updated."})
+        }
+    })
+    .catch(err => { res.status(500).send({ message: "Error updating switch with id: " + id }); })
+});
 
 // Delete Route - Delete
+router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    switches.findByIdAndDelete(id)
+    .then(data => { 
+        if (!data) {
+            res.status(404).send({ message: "Cannot delete switch with id: " + id});
+        } else {
+            res.send({ message: "Switch was deleted."})
+        }
+    })
+    .catch(err => { res.status(500).send({ message: "Error deleting switch with id: " + id }); })
+});
 
 module.exports = router;
