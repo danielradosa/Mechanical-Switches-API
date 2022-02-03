@@ -35,5 +35,6 @@ app.get("/api/welcome", (req, res) => {
 
 // CRUD
 app.use("/api/switches", switchRoute);
+app.use("/api/user", authRoute);
 
 module.exports = app;
