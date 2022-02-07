@@ -44,8 +44,6 @@ router.post("/login", async (req, res) => {
         return res.status(400).json({ error: "Password is wrong" })
     }
 
-    console.log(process.env.JWT_EXPIRES_IN);
-
     const token = jwt.sign
         ({
             email: user.email,

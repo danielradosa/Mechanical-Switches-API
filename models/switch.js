@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 let switchSchema = new Schema ({
     model: { type: String, required: true },
     brand: { type: String, required: true },
-    manufacturer: { type: String, required: false },
     switchCollection: { type: String, required: true },
     switchType: { type: String, required: true },
     actuationForce: { type: String, required: true },
@@ -14,7 +12,8 @@ let switchSchema = new Schema ({
     stemStructure: { type: String, required: true },
     mount: { type: String, required: true },
     lifespan: { type: String, required: true },
-    colors: { type: String, required: true }
+    colors: { type: String, required: true },
+    manufacturer: { type: String, required: true }
 });
 
 module.exports = mongoose.model("switch", switchSchema);

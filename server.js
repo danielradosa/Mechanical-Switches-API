@@ -15,6 +15,14 @@ app.listen(PORT, function () {
     console.log("Server running on port: " + PORT);
 })
 
+// CORS
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-*");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "auth-token, Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // CONNECT TO MONGOdb
 mongoose.connect(
     process.env.DBHOST, {
@@ -32,13 +40,6 @@ const authRoute = require('./routes/auth');
 app.get("/api/welcome", (req, res) => {
     res.status(200).send({ message: "Welcome to the MS-API" });
 })
-
-// CORS
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "auth-token, Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
 // CRUD
 app.use("/api/switches", switchRoute);

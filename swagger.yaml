@@ -1,0 +1,233 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Mechanical Switches API
+host: localhost:4000
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+  - text/xml
+  - text/html
+paths:
+  /api/welcome:
+    get:
+      description: Sharing the love with welcome message
+      summary: Welcome message
+      operationId: getWelcomeMessage
+      tags:
+        - user
+      responses:
+        '200':
+          description: "OK"
+  /api/user/register:
+    post:
+      description: Register a new user
+      summary: Create new user
+      operationId: postNewUser
+      tags:
+        - user
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/user/login:
+    post:
+      description: Login as user
+      summary: Login user
+      operationId: loginExistingUser
+      tags:
+        - user
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/create:
+    post:
+      description: Create a new switch
+      summary: New Switch
+      operationId: postNewSwitch
+      tags:
+        - switches
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "ACCESS DENIED"
+        '401':
+          description: "INVALID TOKEN"
+  /api/switches:
+    get:
+      description: Get all the switches
+      summary: All Switches
+      operationId: getAllSwitches
+      tags:
+        - switches
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      description: Get a specific switch
+      summary: Specific switch
+      operationId: getSingleSwitch
+      tags:
+        - switches
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/type/linear:
+    get:
+      description: Get all linear switches
+      summary: Linear switches
+      operationId: getLinearSwitches
+      tags:
+        - switches
+        - type linear
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/type/tactile:
+    get:
+      description: Get all tactile switches
+      summary: Tactile switches
+      operationId: getTactileSwitches
+      tags:
+        - switches
+        - type tactile
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/type/clicky:
+    get:
+      description: Get all clicky switches
+      summary: Clicky switches
+      operationId: getClickySwitches
+      tags:
+        - switches
+        - type clicky
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/mount/5pin:
+    get:
+      description: Get all switches with 5-pin mount
+      summary: All 5-pin
+      operationId: getAll5pin
+      tags:
+        - switches
+        - 5pin
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/mount/3pin:
+    get:
+      description: Get all switches with 3-pin mount
+      summary: All 3-pin
+      operationId: getAll3pin
+      tags:
+        - switches
+        - 3pin
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "NOT OK"
+  /api/switches/update/{id}:
+    put:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      description: Update a specific switch
+      summary: Update switch
+      operationId: updateSwitch
+      tags:
+        - switches
+        - update
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "ACCESS DENIED"
+        '401':
+          description: "INVALID TOKEN"
+  /api/switches/delete/{id}:
+    delete:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      description: Delete a specific switch
+      summary: Delete switch
+      operationId: deleteSwitch
+      tags:
+        - switches
+        - delete
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "ACCESS DENIED"
+        '401':
+          description: "INVALID TOKEN"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

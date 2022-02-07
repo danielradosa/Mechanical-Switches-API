@@ -3,7 +3,7 @@ const switches = require("../models/switch");
 const { verifyToken } = require("../validation");
 
 // Create Route - Post Switch
-router.post("/", verifyToken, (req, res) => {
+router.post("/create", verifyToken, (req, res) => {
     data = req.body;
     switches.insertMany(data)
     .then(data => { res.send(data); })
@@ -57,7 +57,7 @@ router.get("/mount/3pin", (req, res) => {
 });
 
 // Update Route - Put (specific switch)
-router.put("/:id", verifyToken, (req, res) => {
+router.put("/update/:id", verifyToken, (req, res) => {
     const id = req.params.id;
     switches.findByIdAndUpdate(id, req.body)
     .then(data => { 
@@ -71,7 +71,7 @@ router.put("/:id", verifyToken, (req, res) => {
 });
 
 // Delete Route - Delete
-router.delete("/:id", verifyToken, (req, res) => {
+router.delete("/delete/:id", verifyToken, (req, res) => {
     const id = req.params.id;
     switches.findByIdAndDelete(id)
     .then(data => { 
