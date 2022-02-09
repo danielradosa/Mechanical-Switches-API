@@ -113,8 +113,8 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: byte
       responses:
         200:
           description: OK
@@ -210,8 +210,8 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: byte
       requestBody:
         description: Update a switch
         content:
@@ -245,8 +245,8 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: byte
       responses:
         200:
           description: OK
