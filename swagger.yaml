@@ -1,11 +1,10 @@
 swagger: "2.0"
 info:
-  version: "1.0.0"
+  version: "1.0.3"
   title: Mechanical Switches API
-host: localhost:4000
+host: mechswi-api.herokuapp.com
 basePath: /
 schemes:
-  - http
   - https
 consumes:
   - application/json
@@ -14,6 +13,12 @@ produces:
   - application/xml
   - text/xml
   - text/html
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: auth-token
+      type: apiKey
 paths:
   /api/welcome:
     get:
@@ -37,6 +42,12 @@ paths:
           description: "OK"
         '400':
           description: "NOT OK"
+      parameters:
+        - in: body
+          name: User registration
+          description: The user to create
+          schema:
+            $ref: "#/definitions/userCreate"
   /api/user/login:
     post:
       description: Login as user
@@ -49,11 +60,19 @@ paths:
           description: "OK"
         '400':
           description: "NOT OK"
+      parameters:
+        - in: body
+          name: User login
+          description: The user to login
+          schema:
+            $ref: "#/definitions/userLogin"
   /api/switches/create:
     post:
       description: Create a new switch
       summary: New Switch
       operationId: postNewSwitch
+      security:
+        - ApiKeyAuth: []
       tags:
         - switches
       responses:
@@ -63,6 +82,12 @@ paths:
           description: "ACCESS DENIED"
         '401':
           description: "INVALID TOKEN"
+      parameters:
+        - in: body
+          name: Create switch
+          description: Create a new switch
+          schema:
+            $ref: "#/definitions/switchCU"
   /api/switches:
     get:
       description: Get all the switches
@@ -166,9 +191,16 @@ paths:
           required: true
           type: integer
           format: int64
+        - in: body
+          name: Update existing switch
+          description: Update a switch
+          schema:
+            $ref: "#/definitions/switchCU"
       description: Update a specific switch
       summary: Update switch
       operationId: updateSwitch
+      security:
+        - ApiKeyAuth: []
       tags:
         - switches
         - update
@@ -190,6 +222,8 @@ paths:
       description: Delete a specific switch
       summary: Delete switch
       operationId: deleteSwitch
+      security:
+        - ApiKeyAuth: []
       tags:
         - switches
         - delete
@@ -200,34 +234,64 @@ paths:
           description: "ACCESS DENIED"
         '401':
           description: "INVALID TOKEN"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+definitions:
+  userCreate:
+    properties:
+      userName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    required:  
+      - userName
+      - email
+      - password
+  userLogin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+  switchCU:
+    properties:
+      model:
+        type: string
+      brand:
+        type: string
+      switchCollection:
+        type: string
+      switchType:
+        type: string
+      actuationForce:
+        type: string
+      preTravel:
+        type: string
+      totalTravel:
+        type: string
+      stemStructure:
+        type: string
+      mount:
+        type: string
+      lifespan:
+        type: string
+      colors:
+        type: string
+      manufacturer:
+        type: string
+    required:
+      - model
+      - brand
+      - switchCollection
+      - switchType
+      - actuationForce
+      - preTravel
+      - totalTravel
+      - stemStructure
+      - mount
+      - lifespan
+      - colors
+      - manufacturer
