@@ -1,233 +1,331 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  version: "1.0.0"
   title: Mechanical Switches API
-host: localhost:4000
-basePath: /
-schemes:
-  - http
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
-  - application/xml
-  - text/xml
-  - text/html
+  version: 1.0.3
+servers:
+- url: https://mechswi-api.herokuapp.com/
 paths:
   /api/welcome:
     get:
-      description: Sharing the love with welcome message
-      summary: Welcome message
-      operationId: getWelcomeMessage
       tags:
-        - user
+      - user
+      summary: Welcome message
+      description: Sharing the love with welcome message
+      operationId: getWelcomeMessage
       responses:
-        '200':
-          description: "OK"
+        200:
+          description: OK
+          content: {}
   /api/user/register:
     post:
-      description: Register a new user
-      summary: Create new user
-      operationId: postNewUser
       tags:
-        - user
+      - user
+      summary: Create new user
+      description: Register a new user
+      operationId: postNewUser
+      requestBody:
+        description: The user to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userCreate'
+        required: false
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
+      x-codegen-request-body-name: User registration
   /api/user/login:
     post:
-      description: Login as user
-      summary: Login user
-      operationId: loginExistingUser
       tags:
-        - user
+      - user
+      summary: Login user
+      description: Login as user
+      operationId: loginExistingUser
+      requestBody:
+        description: The user to login
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userLogin'
+        required: false
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
+      x-codegen-request-body-name: User login
   /api/switches/create:
     post:
-      description: Create a new switch
-      summary: New Switch
-      operationId: postNewSwitch
       tags:
-        - switches
+      - switches
+      summary: New Switch
+      description: Create a new switch
+      operationId: postNewSwitch
+      requestBody:
+        description: Create a new switch
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/switchCU'
+        required: false
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "ACCESS DENIED"
-        '401':
-          description: "INVALID TOKEN"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: ACCESS DENIED
+          content: {}
+        401:
+          description: INVALID TOKEN
+          content: {}
+      security:
+      - ApiKeyAuth: []
+      x-codegen-request-body-name: Create switch
   /api/switches:
     get:
-      description: Get all the switches
-      summary: All Switches
-      operationId: getAllSwitches
       tags:
-        - switches
+      - switches
+      summary: All Switches
+      description: Get all the switches
+      operationId: getAllSwitches
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/{id}:
     get:
+      tags:
+      - switches
+      summary: Specific switch
+      description: Get a specific switch
+      operationId: getSingleSwitch
       parameters:
-        - name: id
-          in: path
-          required: true
+      - name: id
+        in: path
+        required: true
+        schema:
           type: integer
           format: int64
-      description: Get a specific switch
-      summary: Specific switch
-      operationId: getSingleSwitch
-      tags:
-        - switches
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/type/linear:
     get:
-      description: Get all linear switches
-      summary: Linear switches
-      operationId: getLinearSwitches
       tags:
-        - switches
-        - type linear
+      - switches
+      - type linear
+      summary: Linear switches
+      description: Get all linear switches
+      operationId: getLinearSwitches
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/type/tactile:
     get:
-      description: Get all tactile switches
-      summary: Tactile switches
-      operationId: getTactileSwitches
       tags:
-        - switches
-        - type tactile
+      - switches
+      - type tactile
+      summary: Tactile switches
+      description: Get all tactile switches
+      operationId: getTactileSwitches
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/type/clicky:
     get:
-      description: Get all clicky switches
-      summary: Clicky switches
-      operationId: getClickySwitches
       tags:
-        - switches
-        - type clicky
+      - switches
+      - type clicky
+      summary: Clicky switches
+      description: Get all clicky switches
+      operationId: getClickySwitches
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/mount/5pin:
     get:
-      description: Get all switches with 5-pin mount
-      summary: All 5-pin
-      operationId: getAll5pin
       tags:
-        - switches
-        - 5pin
+      - switches
+      - 5pin
+      summary: All 5-pin
+      description: Get all switches with 5-pin mount
+      operationId: getAll5pin
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/mount/3pin:
     get:
-      description: Get all switches with 3-pin mount
-      summary: All 3-pin
-      operationId: getAll3pin
       tags:
-        - switches
-        - 3pin
+      - switches
+      - 3pin
+      summary: All 3-pin
+      description: Get all switches with 3-pin mount
+      operationId: getAll3pin
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "NOT OK"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: NOT OK
+          content: {}
   /api/switches/update/{id}:
     put:
+      tags:
+      - switches
+      - update
+      summary: Update switch
+      description: Update a specific switch
+      operationId: updateSwitch
       parameters:
-        - name: id
-          in: path
-          required: true
+      - name: id
+        in: path
+        required: true
+        schema:
           type: integer
           format: int64
-      description: Update a specific switch
-      summary: Update switch
-      operationId: updateSwitch
-      tags:
-        - switches
-        - update
+      requestBody:
+        description: Update a switch
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/switchCU'
+        required: false
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "ACCESS DENIED"
-        '401':
-          description: "INVALID TOKEN"
+        200:
+          description: OK
+          content: {}
+        400:
+          description: ACCESS DENIED
+          content: {}
+        401:
+          description: INVALID TOKEN
+          content: {}
+      security:
+      - ApiKeyAuth: []
+      x-codegen-request-body-name: Update existing switch
   /api/switches/delete/{id}:
     delete:
+      tags:
+      - switches
+      - delete
+      summary: Delete switch
+      description: Delete a specific switch
+      operationId: deleteSwitch
       parameters:
-        - name: id
-          in: path
-          required: true
+      - name: id
+        in: path
+        required: true
+        schema:
           type: integer
           format: int64
-      description: Delete a specific switch
-      summary: Delete switch
-      operationId: deleteSwitch
-      tags:
-        - switches
-        - delete
       responses:
-        '200':
-          description: "OK"
-        '400':
-          description: "ACCESS DENIED"
-        '401':
-          description: "INVALID TOKEN"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        200:
+          description: OK
+          content: {}
+        400:
+          description: ACCESS DENIED
+          content: {}
+        401:
+          description: INVALID TOKEN
+          content: {}
+      security:
+      - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: auth-token
+      type: apiKey
+  schemas:
+    userCreate:
+      required:
+      - email
+      - password
+      - userName
+      type: object
+      properties:
+        userName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    userLogin:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    switchCU:
+      required:
+      - actuationForce
+      - brand
+      - colors
+      - lifespan
+      - manufacturer
+      - model
+      - mount
+      - preTravel
+      - stemStructure
+      - switchCollection
+      - switchType
+      - totalTravel
+      type: object
+      properties:
+        model:
+          type: string
+        brand:
+          type: string
+        switchCollection:
+          type: string
+        switchType:
+          type: string
+        actuationForce:
+          type: string
+        preTravel:
+          type: string
+        totalTravel:
+          type: string
+        stemStructure:
+          type: string
+        mount:
+          type: string
+        lifespan:
+          type: string
+        colors:
+          type: string
+        manufacturer:
+          type: string
